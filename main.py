@@ -19,26 +19,31 @@ def get_difficulty():
             print("Invalid choice. Please try again.")
             continue
 
+        # The return statements return the numbers of attempts the user should have
         if choice == 1:
             print("\nGreat! You have selected the Easy difficulty level."
             "\nLet's start the game!")
-            break
+            return 10
         elif choice == 2:
             print("\nGreat! You have selected the Medium difficulty level."
                   "\nLet's start the game!")
-            break
+            return 5
         elif choice == 3:
             print("\nGreat! You have selected the Hard difficulty level."
                   "\nLet's start the game!")
-            break
+            return 3
         else:
             print("Invalid choice. Please try again.")
 
-def get_guess():
+def get_guess(max_attempts):
     computer_guess = randint(1, 100)
     attempts = 1
 
     while True:
+        if attempts > max_attempts:
+            print(f"You lose! The computer guess was {computer_guess}.")
+            break
+
         try:
             guess = int(input("Enter your guess: "))
         except ValueError:
@@ -57,12 +62,11 @@ def get_guess():
 
 def main():
     welcome()
-    get_difficulty()
-    get_guess()
+    max_attempts = get_difficulty()
+    get_guess(max_attempts)
 
 if __name__ == "__main__":
     main()
-else:
     print("Thank you for playing!")
 
 
